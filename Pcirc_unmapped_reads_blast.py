@@ -24,7 +24,7 @@ parser.add_argument("-p",
 args = parser.parse_args()
 
 evalue = args.evalue
-num_threads = args.num_threads
+num_threads = int(args.num_threads)
 output_file = args.output_file
 query_filename = args.query
 genome_filename = args.genome
@@ -35,5 +35,5 @@ genome_database = genome_path[:genome_path.rfind('/')] + '/genome_database'
 os.system("makeblastdb -in %s -dbtype nucl -out %s" %
           (genome_filename, genome_database))
 
-os.system("blastn -db %s -query %s -out %s -outfmt 6 -evalue %f -num_thread %d" %
+os.system("blastn -db %s -query %s -out %s -outfmt 6 -evalue %f -num_threads %d" %
           (genome_database, query_filename, output_file, evalue, num_threads))
